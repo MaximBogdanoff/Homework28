@@ -7,6 +7,8 @@ import ru.skypro.homework28.model.Employee;
 
 import java.util.*;
 
+import static ru.skypro.homework28.model.Employee.*;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -48,17 +50,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee add(String firstName, String lastName, int salary, int department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
+        if (employees.containsKey(getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
-        employees.put(employee.getFullName(), employee);
+        employees.put(getFullName(), employee);
         return employee;
     }
 
     @Override
     public Employee remove(String firstName, String lastName, int salary, int department) {
-        Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
+        Employee employee = new Employee(firstName,lastName, salary, department);
+        if (employees.containsKey(getFullName())) {
             employees.remove(employee);
             return employee;
         }
@@ -68,14 +70,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee find(String firstName, String lastName, int salary, int department) {
         Employee employee = new Employee(firstName, lastName, salary, department);
-        if (employees.containsKey(employee.getFullName())) {
-            return employees.get(employee.getFullName());
+        if (employees.containsKey(getFullName())) {
+            return employees.get(getFullName());
         }
         throw new EmployeeNotFoundException("");
     }
 
     @Override
-    public Collection<Employee> findAll() {
+    public Collection<Employee> findAll(String firstName, String lastname, int salary, int department) {
         return Collections.unmodifiableCollection(employees.values());
     }
 
@@ -99,8 +101,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+
     @Override
-    public Employee find(String firstName, String lastName) {
-        return null;
+    public void find(String firstName, String lastName) {
+
+    }
+
+    public Employee createEmployee(String getFullName,int salary, int department) {
+        Employee employee = new Employee(getFullName, salary, department);
+        Employee put = employees.put(getFullName, employee);
+        return employees.get(getFullName());
     }
 }

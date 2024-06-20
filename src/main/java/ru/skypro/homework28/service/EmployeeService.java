@@ -7,6 +7,11 @@ import java.util.List;
 
 public interface EmployeeService {
 
+
+    static Employee createEmployee(String getFullName, String lastName, int salary, int department) {
+        return null;
+    }
+
     Employee maxSalary(String firstName, String lastName, int salary, int department);
 
     Employee minSalary(String firstName, String lastName, int salary, int department);
@@ -17,7 +22,7 @@ public interface EmployeeService {
 
     Employee find(String firstName, String lastName, int salary, int department);
 
-    Collection<Employee> findAll();
+    Collection<Employee> findAll(String firstName, String lastname, int salary, int department);
 
     Collection<Employee> maxSalary();
 
@@ -27,5 +32,10 @@ public interface EmployeeService {
 
     void remove(String firstName, String lastName);
 
-    Employee find(String firstName, String lastName);
+    void find(String firstName, String lastName);
+
+    static Employee createEmployee(String getFullName, int salary, int department) {
+        return null;
+    }
+
 }

@@ -1,19 +1,25 @@
 package ru.skypro.homework28.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
-    private final String firstName;
-    private final String lastName;
-    private final int salary;
+    public static String firstName;
+    public static String lastName;
+    private  int salary;
     private int department;
 
 
-    public Employee(String firstName, String lastName, int salary, int department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    public Employee(String firstName, String lastName,int salary, int department) {
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase());
         this.salary = salary;
         this.department = department;
+    }
+
+    public Employee(String getFullName, int salary, int department) {
     }
 
     public String getFirstName() {
@@ -32,7 +38,7 @@ public class Employee {
         return department;
     }
 
-    public String getFullName() {
+    public static String getFullName() {
         return firstName + " " + lastName;
     }
 

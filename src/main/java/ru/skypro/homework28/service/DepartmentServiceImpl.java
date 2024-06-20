@@ -8,16 +8,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
     public final EmployeeServiceImpl employeeServiceImpl;
+    private String firstName;
+    private String lastname;
+    private int salary;
+    private int department;
 
     public DepartmentServiceImpl(EmployeeService employeeServiceImpl) {
         this.employeeServiceImpl = (EmployeeServiceImpl) employeeServiceImpl;
     }
 
     public List<Employee> getAllByDepartment(int dep) {
-        return employeeServiceImpl.findAll()
+        return employeeServiceImpl.findAll(firstName, lastname, salary, department)
                 .stream()
                 .filter(employee -> employee.getDepartment() == dep)
                 .collect(Collectors.toList());
@@ -55,7 +60,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Map<Integer, List<Employee>> getAll() {
-        return employeeServiceImpl.findAll()
+        return employeeServiceImpl.findAll(firstName, lastname, salary, department)
                 .stream().collect(Collectors.groupingBy(Employee::getDepartment));
 
     }

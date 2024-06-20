@@ -1,21 +1,29 @@
 package ru.skypro.homework28.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework28.model.Employee;
 import ru.skypro.homework28.service.DepartmentService;
+import ru.skypro.homework28.service.EmployeeService;
 
 
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
     private final DepartmentService service;
+    private ru.skypro.homework28.model.Employee Employee;
 
     public DepartmentController(DepartmentService service) {
         this.service = service;
+    }
+
+    @GetMapping
+    public ResponseEntity <Employee> createEmployee (String firstName,String lastName, int salary, int department) {
+        if ((!StringUtils.isAlpha(firstName))&(!StringUtils.isAlpha(lastName))) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(EmployeeService.createEmployee(firstName,lastName, salary,department));
     }
 
     @GetMapping("/all")

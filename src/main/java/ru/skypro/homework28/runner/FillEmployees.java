@@ -12,7 +12,7 @@ public class FillEmployees implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        employeeService.add("Иванов", "Иван", 30000, 1);
+        employeeService.add("Иванова", "Ивана", 30000, 1);
         employeeService.add("Петров", "Петр", 35000, 1);
         employeeService.add("Семенов", "Семен", 40000, 2);
         employeeService.add("Павлов", "Павел", 45000, 2);

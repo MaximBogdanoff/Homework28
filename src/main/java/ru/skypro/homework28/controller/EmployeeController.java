@@ -1,9 +1,6 @@
 package ru.skypro.homework28.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework28.model.Employee;
 import ru.skypro.homework28.service.EmployeeService;
 
@@ -17,6 +14,12 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
+    }
+
+
+    @GetMapping("/createEmployee")
+    public Employee createEmployee (String firstName, String lastName, int salary, int department){
+     return EmployeeService.createEmployee(firstName, lastName,salary,department);
     }
 
     @GetMapping("/add")
@@ -44,12 +47,12 @@ public class EmployeeController {
         return service.find(firstName, lastName, salary, department);
     }
 
-    @GetMapping
+    @GetMapping("/findAll")
     public Collection<Employee> findAllEmployee(@RequestParam String firstName,
-                                                @RequestParam String lastName,
+                                                @RequestParam String lastname,
                                                 @RequestParam int salary,
                                                 @RequestParam int department) {
-        return service.findAll();
+        return service.findAll(firstName,lastname,salary,department);
     }
 
 
